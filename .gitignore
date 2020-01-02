@@ -24,6 +24,9 @@
 # Ignore package tarball (built via "mix hex.build").
 /backend/bookwyrm-*.tar
 
+# Ignore our elixir_ls folder, since it is just information for the IDE
+/backend/.elixir_ls
+
 # Since we are building assets from assets/,
 # we ignore priv/static. You may want to comment
 # this depending on your deployment strategy.
@@ -34,15 +37,15 @@
 # Frontend
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+/frontend/node_modules
+/frontend/.pnp
+/frontend/.pnp.js
 
 # testing
 /coverage
 
 # production
-/build
+/frontend/build
 
 # misc
 .DS_Store
