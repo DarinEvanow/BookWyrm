@@ -49,7 +49,7 @@ book_one =
   |> Book.changeset(%{
     title: "The Bird Book",
     description: "The bird is the word.",
-    isbn_13: "1234567890123",
+    isbn13: "1234567890123",
     slug: "the-bird-book",
     authors: [
       trashmen
