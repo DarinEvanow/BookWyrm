@@ -24,6 +24,7 @@ defmodule Bookwyrm.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Bookwyrm.DataCase
+      import Bookwyrm.TestHelpers
     end
   end
 
