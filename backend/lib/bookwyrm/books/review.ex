@@ -20,7 +20,7 @@ defmodule Bookwyrm.Books.Review do
     review
     |> cast(attrs, required_fields ++ optional_fields)
     |> validate_required(required_fields)
-    |> assoc_constraint(:books)
-    |> assoc_constraint(:users)
+    |> assoc_constraint(:book)
+    |> assoc_constraint(:user)
   end
 end
