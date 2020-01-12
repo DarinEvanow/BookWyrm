@@ -10,6 +10,14 @@ defmodule BookwyrmWeb.Resolvers.Books do
     {:ok, Books.list_books(args)}
   end
 
+  def author(_, %{slug: slug}, _) do
+    {:ok, Books.get_author_by_slug!(slug)}
+  end
+
+  def authors(_, args, _) do
+    {:ok, Books.list_authors(args)}
+  end
+
   def authors_for_book(book, _, _) do
     {:ok, Books.authors_for_book(book)}
   end

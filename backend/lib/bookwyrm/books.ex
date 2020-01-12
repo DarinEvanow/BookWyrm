@@ -23,8 +23,17 @@ defmodule Bookwyrm.Books do
   @doc """
   Returns a list of all authors.
   """
-  def list_authors do
-    Repo.all(Author)
+  def list_authors(criteria) do
+    query = from(a in Author)
+
+    Enum.reduce(criteria, query, fn
+      {:limit, limit}, query ->
+        from(a in query, limit: ^limit)
+
+      {:order, order}, query ->
+        from(a in query, order_by: [{^order, :id}])
+    end)
+    |> Repo.all()
   end
 
   @doc """

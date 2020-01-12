@@ -18,6 +18,21 @@ defmodule BookwyrmWeb.Schema.Schema do
 
       resolve(&Resolvers.Books.books/3)
     end
+
+    @desc "Get an author by their slug"
+    field :author, :author do
+      arg(:slug, non_null(:string))
+
+      resolve(&Resolvers.Books.author/3)
+    end
+
+    @desc "Get a list of authors"
+    field :authors, list_of(:author) do
+      arg(:limit, :integer)
+      arg(:order, type: :sort_order, default_value: :asc)
+
+      resolve(&Resolvers.Books.authors/3)
+    end
   end
 
   enum :sort_order do
