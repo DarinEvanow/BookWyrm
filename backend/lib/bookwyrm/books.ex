@@ -77,11 +77,7 @@ defmodule Bookwyrm.Books do
   Returns a list of the authors for the given `book`.
   """
   def authors_for_book(%Book{} = book) do
-    book =
-      Book
-      |> Repo.get_by!(id: book.id)
-      |> Repo.preload(:authors)
-
+    book = Repo.preload(book, :authors)
     book.authors
   end
 
