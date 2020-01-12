@@ -46,10 +46,22 @@ defmodule Bookwyrm.Books do
   end
 
   @doc """
-  Returns a list of all authors.
+  Returns a list of all books matching the given `criteria.
+
+  Example Criteria:
+  [{:limit, 15}, {:order, :asc}]
   """
-  def list_books do
-    Repo.all(Book)
+  def list_books(criteria) do
+    query = from(b in Book)
+
+    Enum.reduce(criteria, query, fn
+      {:limit, limit}, query ->
+        from(b in query, limit: ^limit)
+
+      {:order, order}, query ->
+        from(b in query, order_by: [{^order, :id}])
+    end)
+    |> Repo.all()
   end
 
   @doc """
