@@ -1,5 +1,7 @@
 defmodule BookwyrmWeb.Schema.Schema do
   use Absinthe.Schema
+  import Absinthe.Resolution.Helpers, only: [dataloader: 1, dataloader: 3]
+
   alias Bookwyrm.{Accounts, Books}
   alias BookwyrmWeb.Resolvers
 
@@ -47,9 +49,7 @@ defmodule BookwyrmWeb.Schema.Schema do
     field(:isbn13, non_null(:integer))
     field(:slug, non_null(:string))
 
-    field(:authors, list_of(:author)) do
-      resolve(&Resolvers.Books.authors_for_book/3)
-    end
+    field(:authors, list_of(:author), resolve: dataloader(Books))
   end
 
   object :author do
@@ -57,5 +57,17 @@ defmodule BookwyrmWeb.Schema.Schema do
     field(:first_name, non_null(:string))
     field(:last_name, non_null(:string))
     field(:slug, non_null(:string))
+  end
+
+  def context(ctx) do
+    loader =
+      Dataloader.new()
+      |> Dataloader.add_source(Books, Books.datasource())
+
+    Map.put(ctx, :loader, loader)
+  end
+
+  def plugins do
+    [Absinthe.Middleware.Dataloader] ++ Absinthe.Plugin.defaults()
   end
 end

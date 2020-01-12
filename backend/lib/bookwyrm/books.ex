@@ -74,14 +74,6 @@ defmodule Bookwyrm.Books do
   end
 
   @doc """
-  Returns a list of the authors for the given `book`.
-  """
-  def authors_for_book(%Book{} = book) do
-    book = Repo.preload(book, :authors)
-    book.authors
-  end
-
-  @doc """
   Creates a book associated with the given list of authors.
   """
   def create_book(attrs) do
@@ -108,5 +100,15 @@ defmodule Bookwyrm.Books do
     |> Ecto.Changeset.put_assoc(:user, user)
     |> Ecto.Changeset.put_assoc(:book, book)
     |> Repo.insert()
+  end
+
+  # Dataloader functionality
+
+  def datasource() do
+    Dataloader.Ecto.new(Repo, query: &query/2)
+  end
+
+  def query(queryable, _) do
+    queryable
   end
 end

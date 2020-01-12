@@ -17,8 +17,4 @@ defmodule BookwyrmWeb.Resolvers.Books do
   def authors(_, args, _) do
     {:ok, Books.list_authors(args)}
   end
-
-  def authors_for_book(book, _, _) do
-    {:ok, Books.authors_for_book(book)}
-  end
 end
