@@ -29,11 +29,11 @@ defmodule Bookwyrm.Accounts do
   @doc """
   Authenticates a user.
 
-  Returns `{:ok, user}` if a user exists with the given username
+  Returns `{:ok, user}` if a user exists with the given email
   and the password is valid. Otherwise, `:error` is returned.
   """
-  def authenticate(username, password) do
-    user = Repo.get_by(User, username: username)
+  def authenticate(email, password) do
+    user = Repo.get_by(User, email: email)
 
     with %{password_hash: password_hash} <- user,
          true <- Pbkdf2.verify_pass(password, password_hash) do

@@ -19,8 +19,7 @@ darin =
   |> User.changeset(%{
     username: "darin",
     email: "darin@example.com",
-    password: "secret",
-    books: []
+    password: "secret"
   })
   |> Repo.insert!()
 
@@ -29,8 +28,7 @@ marina =
   |> User.changeset(%{
     username: "marina",
     email: "marina@example.com",
-    password: "secret",
-    books: []
+    password: "secret"
   })
   |> Repo.insert!()
 

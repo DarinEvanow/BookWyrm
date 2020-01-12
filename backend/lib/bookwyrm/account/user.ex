@@ -25,7 +25,6 @@ defmodule Bookwyrm.Accounts.User do
     |> unique_constraint(:username)
     |> unique_constraint(:email)
     |> hash_password()
-    |> put_assoc(:books, attrs.books)
   end
 
   defp hash_password(changeset) do
