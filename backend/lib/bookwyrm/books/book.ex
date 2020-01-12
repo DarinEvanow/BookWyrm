@@ -24,5 +24,6 @@ defmodule Bookwyrm.Books.Book do
     |> cast(attrs, required_fields ++ optional_fields)
     |> validate_required(required_fields)
     |> put_assoc(:authors, attrs.authors)
+    |> put_assoc(:users, attrs.users)
   end
 end

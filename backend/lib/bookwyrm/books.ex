@@ -92,6 +92,14 @@ defmodule Bookwyrm.Books do
   end
 
   @doc """
+  Returns the users that have read this book
+  """
+  def list_users(book) do
+    book = Repo.preload(book, :users)
+    book.users
+  end
+
+  @doc """
   Creates a review for the given user and book.
   """
   def create_review(%User{} = user, %Book{} = book, attrs) do

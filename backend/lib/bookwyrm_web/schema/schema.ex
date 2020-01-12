@@ -35,6 +35,18 @@ defmodule BookwyrmWeb.Schema.Schema do
 
       resolve(&Resolvers.Books.authors/3)
     end
+
+    @desc "Get a user by their id"
+    field :user, :user do
+      arg(:id, non_null(:id))
+
+      resolve(&Resolvers.Books.user/3)
+    end
+
+    @desc "Get a list of users"
+    field :users, list_of(:user) do
+      resolve(&Resolvers.Books.users/3)
+    end
   end
 
   enum :sort_order do
@@ -50,6 +62,7 @@ defmodule BookwyrmWeb.Schema.Schema do
     field(:slug, non_null(:string))
 
     field(:authors, list_of(:author), resolve: dataloader(Books))
+    field(:users, list_of(:user), resolve: dataloader(Accounts))
   end
 
   object :author do
@@ -57,12 +70,23 @@ defmodule BookwyrmWeb.Schema.Schema do
     field(:first_name, non_null(:string))
     field(:last_name, non_null(:string))
     field(:slug, non_null(:string))
+
+    field(:books, list_of(:book), resolve: dataloader(Books))
+  end
+
+  object :user do
+    field(:id, non_null(:id))
+    field(:username, non_null(:string))
+    field(:email, non_null(:string))
+
+    field(:books, list_of(:book), resolve: dataloader(Books))
   end
 
   def context(ctx) do
     loader =
       Dataloader.new()
       |> Dataloader.add_source(Books, Books.datasource())
+      |> Dataloader.add_source(Accounts, Accounts.datasource())
 
     Map.put(ctx, :loader, loader)
   end
