@@ -65,13 +65,13 @@ defmodule Bookwyrm.TestHelpers do
     title = "title-#{System.unique_integer([:positive])}"
     description = "description-#{System.unique_integer([:positive])}"
     slug = "slug-#{System.unique_integer([:positive])}"
-    isbn_13 = 1_234_567_890_123
+    isbn13 = 1_234_567_890_123
 
     attrs =
       Enum.into(attrs, %{
         title: attrs[:title] || title,
         description: attrs[:description] || description,
-        isbn_13: attrs[:isbn_13] || isbn_13,
+        isbn13: attrs[:isbn13] || isbn13,
         slug: attrs[:slug] || slug,
         authors: [author]
       })

@@ -23,8 +23,17 @@ defmodule Bookwyrm.Books do
   @doc """
   Returns a list of all authors.
   """
-  def list_authors do
-    Repo.all(Author)
+  def list_authors(criteria) do
+    query = from(a in Author)
+
+    Enum.reduce(criteria, query, fn
+      {:limit, limit}, query ->
+        from(a in query, limit: ^limit)
+
+      {:order, order}, query ->
+        from(a in query, order_by: [{^order, :id}])
+    end)
+    |> Repo.all()
   end
 
   @doc """
@@ -46,10 +55,22 @@ defmodule Bookwyrm.Books do
   end
 
   @doc """
-  Returns a list of all authors.
+  Returns a list of all books matching the given `criteria`.
+
+  Example Criteria:
+  [{:limit, 15}, {:order, :asc}]
   """
-  def list_books do
-    Repo.all(Book)
+  def list_books(criteria) do
+    query = from(b in Book)
+
+    Enum.reduce(criteria, query, fn
+      {:limit, limit}, query ->
+        from(b in query, limit: ^limit)
+
+      {:order, order}, query ->
+        from(b in query, order_by: [{^order, :id}])
+    end)
+    |> Repo.all()
   end
 
   @doc """
@@ -71,6 +92,14 @@ defmodule Bookwyrm.Books do
   end
 
   @doc """
+  Returns the users that have read this book
+  """
+  def list_users(book) do
+    book = Repo.preload(book, :users)
+    book.users
+  end
+
+  @doc """
   Creates a review for the given user and book.
   """
   def create_review(%User{} = user, %Book{} = book, attrs) do
@@ -79,5 +108,15 @@ defmodule Bookwyrm.Books do
     |> Ecto.Changeset.put_assoc(:user, user)
     |> Ecto.Changeset.put_assoc(:book, book)
     |> Repo.insert()
+  end
+
+  # Dataloader functionality
+
+  def datasource() do
+    Dataloader.Ecto.new(Repo, query: &query/2)
+  end
+
+  def query(queryable, _) do
+    queryable
   end
 end

@@ -34,25 +34,25 @@ marina =
   })
   |> Repo.insert!()
 
-trashmen =
+rothfuss =
   %Author{}
   |> Author.changeset(%{
-    first_name: "The",
-    last_name: "Trashmen",
-    slug: "the-trashmen",
+    first_name: "Patrick",
+    last_name: "Rothfuss",
+    slug: "patrick-rothfuss",
     books: []
   })
   |> Repo.insert!()
 
-book_one =
+name_of_the_wind =
   %Book{}
   |> Book.changeset(%{
-    title: "The Bird Book",
-    description: "The bird is the word.",
-    isbn_13: "1234567890123",
-    slug: "the-bird-book",
+    title: "The Name of the Wind",
+    description: "The Name of the Wind is a heroic fantasy novel.",
+    isbn13: 9_780_756_404_079,
+    slug: "the-name-of-the-wind",
     authors: [
-      trashmen
+      rothfuss
     ],
     users: [
       darin,
@@ -60,14 +60,166 @@ book_one =
     ],
     reviews: [
       %Review{
-        review: "I have never felt so close to God.",
+        review: "Very good.",
         rating: 5,
         user: darin
       },
       %Review{
-        review: "I hate this because I am a heathen.",
-        rating: 0,
+        review: "I like.",
+        rating: 5,
         user: marina
+      }
+    ]
+  })
+  |> Repo.insert!()
+
+wise_mans_fear =
+  %Book{}
+  |> Book.changeset(%{
+    title: "The Wise Man's Fear",
+    description: "The Wise Man's Fear is a heroic fantasy novel.",
+    isbn13: 9_780_756_404_734,
+    slug: "the-wise-mans-fear",
+    authors: [
+      rothfuss
+    ],
+    users: [
+      darin,
+      marina
+    ],
+    reviews: [
+      %Review{
+        review: "Even better than the first.",
+        rating: 5,
+        user: darin
+      },
+      %Review{
+        review: "I like. Hope the third one comes out soon!",
+        rating: 5,
+        user: marina
+      }
+    ]
+  })
+  |> Repo.insert!()
+
+asimov =
+  %Author{}
+  |> Author.changeset(%{
+    first_name: "Isaac",
+    last_name: "Asimov",
+    slug: "isaac-asimov",
+    books: []
+  })
+  |> Repo.insert!()
+
+foundation =
+  %Book{}
+  |> Book.changeset(%{
+    title: "Foundation",
+    description: "The first book in the Foundation Series.",
+    isbn13: 1_234_567_890_123,
+    slug: "foundation",
+    authors: [
+      asimov
+    ],
+    users: [
+      darin
+    ],
+    reviews: [
+      %Review{
+        review: "Good.",
+        rating: 5,
+        user: darin
+      }
+    ]
+  })
+  |> Repo.insert!()
+
+foundation_and_empire =
+  %Book{}
+  |> Book.changeset(%{
+    title: "Foundation and Empire",
+    description: "The second book in the Foundation Series.",
+    isbn13: 2_234_567_890_123,
+    slug: "foundation-and-empire",
+    authors: [
+      asimov
+    ],
+    users: [
+      darin
+    ],
+    reviews: [
+      %Review{
+        review: "Gooder.",
+        rating: 5,
+        user: darin
+      }
+    ]
+  })
+  |> Repo.insert!()
+
+second_foundation =
+  %Book{}
+  |> Book.changeset(%{
+    title: "Second Foundation",
+    description: "The third book in the Foundation Series.",
+    isbn13: 3_234_567_890_123,
+    slug: "second-foundation",
+    authors: [
+      asimov
+    ],
+    users: [
+      darin
+    ],
+    reviews: [
+      %Review{
+        review: "Even better than the first.",
+        rating: 5,
+        user: darin
+      }
+    ]
+  })
+  |> Repo.insert!()
+
+gaiman =
+  %Author{}
+  |> Author.changeset(%{
+    first_name: "Neil",
+    last_name: "Gaiman",
+    slug: "neil-gaiman",
+    books: []
+  })
+  |> Repo.insert!()
+
+pratchett =
+  %Author{}
+  |> Author.changeset(%{
+    first_name: "Terry",
+    last_name: "Pratchett",
+    slug: "terry-pratchett",
+    books: []
+  })
+  |> Repo.insert!()
+
+good_omens =
+  %Book{}
+  |> Book.changeset(%{
+    title: "Good Omens",
+    description: "A book about the birth of the son of Satan and the coming of the End Times.",
+    isbn13: 4_234_567_890_123,
+    slug: "good-omens",
+    authors: [
+      gaiman,
+      pratchett
+    ],
+    users: [
+      darin
+    ],
+    reviews: [
+      %Review{
+        review: "Laughed so hard I felt close to God.",
+        rating: 5,
+        user: darin
       }
     ]
   })

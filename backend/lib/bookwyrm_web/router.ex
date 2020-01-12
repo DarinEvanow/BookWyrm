@@ -5,7 +5,14 @@ defmodule BookwyrmWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", BookwyrmWeb do
+  scope "/" do
     pipe_through :api
+
+    forward "/api", Absinthe.Plug, schema: BookwyrmWeb.Schema.Schema
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: BookwyrmWeb.Schema.Schema,
+      socket: BookwyrmWeb.UserSocket,
+      interface: :simple
   end
 end

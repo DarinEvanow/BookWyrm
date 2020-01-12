@@ -37,7 +37,7 @@ defmodule Bookwyrm.BooksTest do
     test "returns the book with the given slug" do
       author = author_fixture()
       book = book_fixture(author)
-      assert Books.get_book_by_slug!(book.slug).isbn_13 == book.isbn_13
+      assert Books.get_book_by_slug!(book.slug).isbn13 == book.isbn13
     end
   end
 
@@ -49,14 +49,14 @@ defmodule Bookwyrm.BooksTest do
         Books.create_book(%{
           title: "Testing",
           description: "A book for testing",
-          isbn_13: 1_234_567_890_123,
+          isbn13: 1_234_567_890_123,
           slug: "testing",
           authors: [author]
         })
 
       assert book.title == "Testing"
       assert book.description == "A book for testing"
-      assert book.isbn_13 == 1_234_567_890_123
+      assert book.isbn13 == 1_234_567_890_123
       assert book.slug == "testing"
       assert book.authors == [author]
     end

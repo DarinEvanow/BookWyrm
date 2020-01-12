@@ -6,7 +6,7 @@ defmodule Bookwyrm.Books.Book do
   schema "books" do
     field(:title, :string)
     field(:description, :string)
-    field(:isbn_13, :integer)
+    field(:isbn13, :integer)
     field(:slug, :string)
 
     many_to_many(:users, Bookwyrm.Accounts.User, join_through: "users_books")
@@ -17,12 +17,13 @@ defmodule Bookwyrm.Books.Book do
   end
 
   def changeset(book, attrs) do
-    required_fields = [:title, :description, :isbn_13, :slug]
+    required_fields = [:title, :description, :isbn13, :slug]
     optional_fields = []
 
     book
     |> cast(attrs, required_fields ++ optional_fields)
     |> validate_required(required_fields)
     |> put_assoc(:authors, attrs.authors)
+    |> put_assoc(:users, attrs.users)
   end
 end
