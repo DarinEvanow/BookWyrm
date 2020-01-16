@@ -26,4 +26,17 @@ defmodule BookwyrmWeb.Resolvers.Books do
   def users(_, %{book: book}, _) do
     {:ok, Books.list_users(book)}
   end
+
+  def add_book(_, args, %{context: %{current_user: user}}) do
+    case Books.add_book(user, args) do
+      {:error, changeset} ->
+        {
+          :error,
+          message: "Could not create review!", details: ChangesetErrors.error_details(changeset)
+        }
+
+      {:ok, book} ->
+        {:ok, book}
+    end
+  end
 end

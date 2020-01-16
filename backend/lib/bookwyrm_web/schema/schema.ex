@@ -4,6 +4,7 @@ defmodule BookwyrmWeb.Schema.Schema do
 
   alias Bookwyrm.{Accounts, Books}
   alias BookwyrmWeb.Resolvers
+  alias BookwyrmWeb.Schema.Middleware
 
   query do
     @desc "Get a book by its slug"
@@ -55,6 +56,7 @@ defmodule BookwyrmWeb.Schema.Schema do
       arg(:username, non_null(:string))
       arg(:email, non_null(:string))
       arg(:password, non_null(:string))
+
       resolve(&Resolvers.Accounts.signup/3)
     end
 
@@ -62,6 +64,7 @@ defmodule BookwyrmWeb.Schema.Schema do
     field :signin, :session do
       arg(:email, non_null(:string))
       arg(:password, non_null(:string))
+
       resolve(&Resolvers.Accounts.signin/3)
     end
   end
