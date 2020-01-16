@@ -4,6 +4,7 @@ defmodule BookwyrmWeb.Schema.Schema do
 
   alias Bookwyrm.{Accounts, Books}
   alias BookwyrmWeb.Resolvers
+  alias BookwyrmWeb.Schema.Middleware
 
   query do
     @desc "Get a book by its slug"
@@ -49,6 +50,25 @@ defmodule BookwyrmWeb.Schema.Schema do
     end
   end
 
+  mutation do
+    @desc "Create a user account"
+    field :signup, :session do
+      arg(:username, non_null(:string))
+      arg(:email, non_null(:string))
+      arg(:password, non_null(:string))
+
+      resolve(&Resolvers.Accounts.signup/3)
+    end
+
+    @desc "Sign in a user"
+    field :signin, :session do
+      arg(:email, non_null(:string))
+      arg(:password, non_null(:string))
+
+      resolve(&Resolvers.Accounts.signin/3)
+    end
+  end
+
   enum :sort_order do
     value(:asc)
     value(:desc)
@@ -80,6 +100,11 @@ defmodule BookwyrmWeb.Schema.Schema do
     field(:email, non_null(:string))
 
     field(:books, list_of(:book), resolve: dataloader(Books))
+  end
+
+  object :session do
+    field(:user, non_null(:user))
+    field(:token, non_null(:string))
   end
 
   def context(ctx) do
