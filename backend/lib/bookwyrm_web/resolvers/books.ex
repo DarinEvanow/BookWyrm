@@ -32,7 +32,7 @@ defmodule BookwyrmWeb.Resolvers.Books do
       {:error, changeset} ->
         {
           :error,
-          message: "Could not create review!", details: ChangesetErrors.error_details(changeset)
+          message: "Could not add book!", details: ChangesetErrors.error_details(changeset)
         }
 
       {:ok, book} ->

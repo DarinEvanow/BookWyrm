@@ -4,8 +4,7 @@ defmodule Bookwyrm.Books.Author do
   import Ecto.Query
 
   schema "authors" do
-    field(:first_name, :string)
-    field(:last_name, :string)
+    field(:name, :string)
     field(:slug, :string)
 
     many_to_many(:books, Bookwyrm.Books.Book, join_through: "authors_books")
@@ -14,11 +13,22 @@ defmodule Bookwyrm.Books.Author do
   end
 
   def changeset(author, attrs) do
-    required_fields = [:first_name, :last_name, :slug]
+    required_fields = [:name]
     optional_fields = []
 
     author
     |> cast(attrs, required_fields ++ optional_fields)
     |> validate_required(required_fields)
+    |> add_slug()
+  end
+
+  defp add_slug(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{name: name}} ->
+        put_change(changeset, :slug, Slugger.slugify_downcase(name))
+
+      _ ->
+        changeset
+    end
   end
 end

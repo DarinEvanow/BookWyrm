@@ -83,6 +83,27 @@ defmodule Bookwyrm.Books do
   end
 
   @doc """
+  Add a book to the current users list of books.
+  """
+  def add_book(user, attrs) do
+    author = get_or_insert_author(attrs.author_name)
+
+    create_book(attrs)
+    |> Ecto.Changeset.put_assoc(:author, author)
+    |> Ecto.Changeset.put_assoc(:user, user)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Get an author if it exists, or create one if it does not
+  """
+  defp get_or_insert_author(attrs) do
+    %Author{}
+    |> Author.changeset(attrs)
+    |> Repo.insert!(on_conflict: [set: [name: attrs.name]], conflict_target: :name)
+  end
+
+  @doc """
   Returns the review with the given `id`.
 
   Raises `Ecto.NoResultsError` if no booking was found.

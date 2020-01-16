@@ -3,13 +3,12 @@ defmodule Bookwyrm.Repo.Migrations.CreateAuthors do
 
   def change do
     create table(:authors) do
-      add(:first_name, :string, null: false)
-      add(:last_name, :string, null: false)
+      add(:name, :string, null: false)
       add(:slug, :string, null: false)
 
       timestamps()
     end
 
-    create unique_index(:authors, [:slug])
+    create(unique_index(:authors, [:slug]))
   end
 end

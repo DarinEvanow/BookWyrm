@@ -35,9 +35,7 @@ marina =
 rothfuss =
   %Author{}
   |> Author.changeset(%{
-    first_name: "Patrick",
-    last_name: "Rothfuss",
-    slug: "patrick-rothfuss",
+    name: "Patrick Rothfuss",
     books: []
   })
   |> Repo.insert!()
@@ -103,9 +101,7 @@ wise_mans_fear =
 asimov =
   %Author{}
   |> Author.changeset(%{
-    first_name: "Isaac",
-    last_name: "Asimov",
-    slug: "isaac-asimov",
+    name: "Isaac Asimov",
     books: []
   })
   |> Repo.insert!()
@@ -182,9 +178,7 @@ second_foundation =
 gaiman =
   %Author{}
   |> Author.changeset(%{
-    first_name: "Neil",
-    last_name: "Gaiman",
-    slug: "neil-gaiman",
+    name: "Neil Gaiman",
     books: []
   })
   |> Repo.insert!()
@@ -192,9 +186,7 @@ gaiman =
 pratchett =
   %Author{}
   |> Author.changeset(%{
-    first_name: "Terry",
-    last_name: "Pratchett",
-    slug: "terry-pratchett",
+    name: "Terry Pratchett",
     books: []
   })
   |> Repo.insert!()
