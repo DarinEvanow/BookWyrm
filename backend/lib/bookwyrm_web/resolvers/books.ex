@@ -28,11 +28,15 @@ defmodule BookwyrmWeb.Resolvers.Books do
   end
 
   def add_book(_, args, %{context: %{current_user: user}}) do
-    case Books.add_book(user, args) do
+    case Books.add_book(
+           user,
+           %{title: args.title, description: args.description, isbn13: args.isbn13},
+           %{name: args.author_name}
+         ) do
       {:error, changeset} ->
         {
           :error,
-          message: "Could not create review!", details: ChangesetErrors.error_details(changeset)
+          message: "Could not add book!", details: ChangesetErrors.error_details(changeset)
         }
 
       {:ok, book} ->

@@ -25,10 +25,9 @@ defmodule Bookwyrm.TestHelpers do
 
     attrs =
       Enum.into(attrs, %{
-        username: "test-user",
+        username: attrs[:username] || "test-user",
         email: attrs[:email] || "#{username}@example.com",
-        password: attrs[:password] || "supersecret",
-        books: []
+        password: attrs[:password] || "supersecret"
       })
 
     {:ok, user} =
@@ -40,15 +39,11 @@ defmodule Bookwyrm.TestHelpers do
   end
 
   def author_fixture(attrs \\ %{}, books \\ []) do
-    first_name = "first_name-#{System.unique_integer([:positive])}"
-    last_name = "last_name-#{System.unique_integer([:positive])}"
-    slug = "slug-#{System.unique_integer([:positive])}"
+    name = "name-#{System.unique_integer([:positive])}"
 
     attrs =
       Enum.into(attrs, %{
-        first_name: attrs[:first_name] || first_name,
-        last_name: attrs[:last_name] || last_name,
-        slug: attrs[:slug] || slug,
+        name: attrs[:name] || name,
         books: books
       })
 
@@ -64,15 +59,13 @@ defmodule Bookwyrm.TestHelpers do
   def book_fixture(author \\ %Author{}, attrs \\ %{}) do
     title = "title-#{System.unique_integer([:positive])}"
     description = "description-#{System.unique_integer([:positive])}"
-    slug = "slug-#{System.unique_integer([:positive])}"
-    isbn13 = 1_234_567_890_123
+    isbn13 = System.unique_integer([:positive])
 
     attrs =
       Enum.into(attrs, %{
         title: attrs[:title] || title,
         description: attrs[:description] || description,
         isbn13: attrs[:isbn13] || isbn13,
-        slug: attrs[:slug] || slug,
         authors: [author]
       })
 

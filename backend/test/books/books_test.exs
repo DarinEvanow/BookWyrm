@@ -14,7 +14,7 @@ defmodule Bookwyrm.BooksTest do
     test "returns all of the authors" do
       _author_one = author_fixture()
       _author_two = author_fixture()
-      assert length(Books.list_authors()) == 2
+      assert length(Books.list_authors(%{})) == 6
     end
   end
 
@@ -22,13 +22,10 @@ defmodule Bookwyrm.BooksTest do
     test "creates an author with the correct information" do
       {:ok, author} =
         Books.create_author(%{
-          first_name: "Frank",
-          last_name: "Herbert",
-          slug: "frank-herbert"
+          name: "Frank Herbert"
         })
 
-      assert author.first_name == "Frank"
-      assert author.last_name == "Herbert"
+      assert author.name == "Frank Herbert"
       assert author.slug == "frank-herbert"
     end
   end
@@ -46,13 +43,15 @@ defmodule Bookwyrm.BooksTest do
       author = author_fixture()
 
       {:ok, book} =
-        Books.create_book(%{
-          title: "Testing",
-          description: "A book for testing",
-          isbn13: 1_234_567_890_123,
-          slug: "testing",
-          authors: [author]
-        })
+        Books.create_book(
+          %{
+            title: "Testing",
+            description: "A book for testing",
+            isbn13: 1_234_567_890_123,
+            slug: "testing"
+          },
+          [author]
+        )
 
       assert book.title == "Testing"
       assert book.description == "A book for testing"
@@ -82,6 +81,28 @@ defmodule Bookwyrm.BooksTest do
       {:ok, review} = Books.create_review(user, book, %{review: "So good.", rating: 5})
       assert review.user == user
       assert review.book == book
+    end
+  end
+
+  describe "add_book/2" do
+    test "creates a book and author, then associates the book to the given user" do
+      user = user_fixture()
+
+      book = %{
+        title: "Mort",
+        description: "A book about death.",
+        isbn13: 9_780_575_041_714
+      }
+
+      author = %{
+        name: "Terry Pratchett"
+      }
+
+      {:ok, mort} = Books.add_book(user, book, author)
+
+      user = Repo.preload(user, :books)
+
+      assert Enum.member?(Enum.map(mort.users, & &1.id), user.id)
     end
   end
 end

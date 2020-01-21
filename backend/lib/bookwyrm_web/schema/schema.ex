@@ -67,6 +67,17 @@ defmodule BookwyrmWeb.Schema.Schema do
 
       resolve(&Resolvers.Accounts.signin/3)
     end
+
+    @desc "Add a book to the current users list of books"
+    field :add_book, :book do
+      arg(:title, non_null(:string))
+      arg(:description, non_null(:string))
+      arg(:isbn13, non_null(:integer))
+      arg(:author_name, non_null(:string))
+
+      middleware(Middleware.Authenticate)
+      resolve(&Resolvers.Books.add_book/3)
+    end
   end
 
   enum :sort_order do
@@ -87,8 +98,7 @@ defmodule BookwyrmWeb.Schema.Schema do
 
   object :author do
     field(:id, non_null(:id))
-    field(:first_name, non_null(:string))
-    field(:last_name, non_null(:string))
+    field(:name, non_null(:string))
     field(:slug, non_null(:string))
 
     field(:books, list_of(:book), resolve: dataloader(Books))

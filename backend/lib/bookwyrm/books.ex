@@ -21,7 +21,7 @@ defmodule Bookwyrm.Books do
   end
 
   @doc """
-  Returns a list of all authors.
+  Returns a list of all authors that satisfy the given criteria.
   """
   def list_authors(criteria) do
     query = from(a in Author)
@@ -76,10 +76,30 @@ defmodule Bookwyrm.Books do
   @doc """
   Creates a book associated with the given list of authors.
   """
-  def create_book(attrs) do
+  def create_book(book_attrs, authors) do
     %Book{}
-    |> Book.changeset(attrs)
+    |> Book.changeset(book_attrs)
+    |> Ecto.Changeset.put_assoc(:authors, authors)
     |> Repo.insert()
+  end
+
+  @doc """
+  Add a book to the current users list of books.
+  """
+  def add_book(user, book_attrs, author_attrs) do
+    author = get_or_insert_author(author_attrs)
+
+    %Book{}
+    |> Book.changeset(book_attrs)
+    |> Ecto.Changeset.put_assoc(:authors, [author])
+    |> Ecto.Changeset.put_assoc(:users, [user])
+    |> Repo.insert()
+  end
+
+  defp get_or_insert_author(attrs) do
+    %Author{}
+    |> Author.changeset(attrs)
+    |> Repo.insert!(on_conflict: [set: [name: attrs.name]], conflict_target: :name)
   end
 
   @doc """

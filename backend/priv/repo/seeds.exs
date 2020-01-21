@@ -35,9 +35,7 @@ marina =
 rothfuss =
   %Author{}
   |> Author.changeset(%{
-    first_name: "Patrick",
-    last_name: "Rothfuss",
-    slug: "patrick-rothfuss",
+    name: "Patrick Rothfuss",
     books: []
   })
   |> Repo.insert!()
@@ -77,7 +75,6 @@ wise_mans_fear =
     title: "The Wise Man's Fear",
     description: "The Wise Man's Fear is a heroic fantasy novel.",
     isbn13: 9_780_756_404_734,
-    slug: "the-wise-mans-fear",
     authors: [
       rothfuss
     ],
@@ -103,9 +100,7 @@ wise_mans_fear =
 asimov =
   %Author{}
   |> Author.changeset(%{
-    first_name: "Isaac",
-    last_name: "Asimov",
-    slug: "isaac-asimov",
+    name: "Isaac Asimov",
     books: []
   })
   |> Repo.insert!()
@@ -116,7 +111,6 @@ foundation =
     title: "Foundation",
     description: "The first book in the Foundation Series.",
     isbn13: 1_234_567_890_123,
-    slug: "foundation",
     authors: [
       asimov
     ],
@@ -139,7 +133,6 @@ foundation_and_empire =
     title: "Foundation and Empire",
     description: "The second book in the Foundation Series.",
     isbn13: 2_234_567_890_123,
-    slug: "foundation-and-empire",
     authors: [
       asimov
     ],
@@ -162,7 +155,6 @@ second_foundation =
     title: "Second Foundation",
     description: "The third book in the Foundation Series.",
     isbn13: 3_234_567_890_123,
-    slug: "second-foundation",
     authors: [
       asimov
     ],
@@ -182,9 +174,7 @@ second_foundation =
 gaiman =
   %Author{}
   |> Author.changeset(%{
-    first_name: "Neil",
-    last_name: "Gaiman",
-    slug: "neil-gaiman",
+    name: "Neil Gaiman",
     books: []
   })
   |> Repo.insert!()
@@ -192,9 +182,7 @@ gaiman =
 pratchett =
   %Author{}
   |> Author.changeset(%{
-    first_name: "Terry",
-    last_name: "Pratchett",
-    slug: "terry-pratchett",
+    name: "Terry Pratchett",
     books: []
   })
   |> Repo.insert!()
@@ -205,7 +193,6 @@ good_omens =
     title: "Good Omens",
     description: "A book about the birth of the son of Satan and the coming of the End Times.",
     isbn13: 4_234_567_890_123,
-    slug: "good-omens",
     authors: [
       gaiman,
       pratchett

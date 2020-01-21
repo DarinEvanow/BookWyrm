@@ -17,13 +17,24 @@ defmodule Bookwyrm.Books.Book do
   end
 
   def changeset(book, attrs) do
-    required_fields = [:title, :description, :isbn13, :slug]
+    required_fields = [:title, :description, :isbn13]
     optional_fields = []
 
     book
     |> cast(attrs, required_fields ++ optional_fields)
     |> validate_required(required_fields)
-    |> put_assoc(:authors, attrs.authors)
-    |> put_assoc(:users, attrs.users)
+    |> add_slug()
+    |> unique_constraint(:isbn13)
+    |> unique_constraint(:slug)
+  end
+
+  defp add_slug(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{title: title}} ->
+        put_change(changeset, :slug, Slugger.slugify_downcase(title))
+
+      _ ->
+        changeset
+    end
   end
 end
