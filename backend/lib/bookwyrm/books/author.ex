@@ -20,6 +20,8 @@ defmodule Bookwyrm.Books.Author do
     |> cast(attrs, required_fields ++ optional_fields)
     |> validate_required(required_fields)
     |> add_slug()
+    |> unique_constraint(:name)
+    |> unique_constraint(:slug)
   end
 
   defp add_slug(changeset) do

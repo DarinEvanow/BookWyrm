@@ -9,6 +9,7 @@ defmodule Bookwyrm.Repo.Migrations.CreateAuthors do
       timestamps()
     end
 
+    create(unique_index(:authors, [:name]))
     create(unique_index(:authors, [:slug]))
   end
 end
