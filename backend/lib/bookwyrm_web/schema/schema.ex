@@ -48,6 +48,11 @@ defmodule BookwyrmWeb.Schema.Schema do
     field :users, list_of(:user) do
       resolve(&Resolvers.Books.users/3)
     end
+
+    @desc "Get the currently signed-in user"
+    field :me, :user do
+      resolve(&Resolvers.Accounts.me/3)
+    end
   end
 
   mutation do
