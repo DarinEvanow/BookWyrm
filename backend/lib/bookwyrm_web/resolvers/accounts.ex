@@ -26,4 +26,12 @@ defmodule BookwyrmWeb.Resolvers.Accounts do
         {:ok, %{user: user, token: token}}
     end
   end
+
+  def me(_, _, %{context: %{current_user: user}}) do
+    {:ok, user}
+  end
+
+  def me(_, _, _) do
+    {:ok, nil}
+  end
 end
