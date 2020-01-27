@@ -1,7 +1,7 @@
 defmodule Bookwyrm.TestHelpers do
   alias Bookwyrm.Repo
 
-  alias Bookwyrm.Books.{Author, Book, Review}
+  alias Bookwyrm.Books.{Author, Book, List, Review}
   alias Bookwyrm.Accounts.User
 
   def user(username) do
@@ -95,5 +95,23 @@ defmodule Bookwyrm.TestHelpers do
       |> Repo.insert()
 
     review
+  end
+
+  def list_fixture(attrs \\ %{}, user \\ %User{}, book \\ %Book{}) do
+    name = "list-#{System.unique_integer([:positive])}"
+
+    attrs =
+      Enum.into(attrs, %{
+        name: attrs[:name] || name
+      })
+
+    {:ok, list} =
+      %List{}
+      |> List.changeset(attrs)
+      |> Ecto.Changeset.put_assoc(:user, user)
+      |> Ecto.Changeset.put_assoc(:books, [book])
+      |> Repo.insert()
+
+    list
   end
 end

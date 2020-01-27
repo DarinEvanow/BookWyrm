@@ -49,6 +49,19 @@ defmodule BookwyrmWeb.Schema.Schema do
       resolve(&Resolvers.Books.users/3)
     end
 
+    @desc "Get a users list"
+    field :list, :list do
+      arg(:id, non_null(:id))
+
+      resolve(&Resolvers.Books.list/3)
+    end
+
+    @desc "Get a users lists"
+    field :lists, list_of(:list) do
+      middleware(Middleware.Authenticate)
+      resolve(&Resolvers.Books.lists/3)
+    end
+
     @desc "Get the currently signed-in user"
     field :me, :user do
       resolve(&Resolvers.Accounts.me/3)
@@ -83,6 +96,23 @@ defmodule BookwyrmWeb.Schema.Schema do
       middleware(Middleware.Authenticate)
       resolve(&Resolvers.Books.add_book/3)
     end
+
+    @desc "Add a list to the current users lists"
+    field :add_list, :list do
+      arg(:name, non_null(:string))
+
+      middleware(Middleware.Authenticate)
+      resolve(&Resolvers.Books.add_list/3)
+    end
+
+    @desc "Add a book to the given list"
+    field :add_book_to_list, :list do
+      arg(:list_id, non_null(:id))
+      arg(:book_slug, non_null(:string))
+
+      middleware(Middleware.Authenticate)
+      resolve(&Resolvers.Books.add_book_to_list/3)
+    end
   end
 
   enum :sort_order do
@@ -102,6 +132,14 @@ defmodule BookwyrmWeb.Schema.Schema do
   end
 
   object :author do
+    field(:id, non_null(:id))
+    field(:name, non_null(:string))
+    field(:slug, non_null(:string))
+
+    field(:books, list_of(:book), resolve: dataloader(Books))
+  end
+
+  object :list do
     field(:id, non_null(:id))
     field(:name, non_null(:string))
     field(:slug, non_null(:string))

@@ -10,6 +10,7 @@ defmodule Bookwyrm.Accounts.User do
 
     many_to_many(:books, Bookwyrm.Books.Book, join_through: "users_books")
     has_many(:reviews, Bookwyrm.Books.Review)
+    has_many(:lists, Bookwyrm.Books.List)
 
     timestamps()
   end
