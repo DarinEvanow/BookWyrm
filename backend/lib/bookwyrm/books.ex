@@ -6,7 +6,7 @@ defmodule Bookwyrm.Books do
   import Ecto.Query, warn: false
   alias Bookwyrm.Repo
 
-  alias Bookwyrm.Books.{Author, Book, Review}
+  alias Bookwyrm.Books.{Author, Book, List, Review}
   alias Bookwyrm.Accounts.User
 
   @doc """
@@ -127,6 +127,49 @@ defmodule Bookwyrm.Books do
     |> Review.changeset(attrs)
     |> Ecto.Changeset.put_assoc(:user, user)
     |> Ecto.Changeset.put_assoc(:book, book)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Returns the list with the given `id`.
+  """
+  def get_list!(id) do
+    Repo.get!(List, id)
+  end
+
+  @doc """
+  Returns all the lists of the given `user`.
+  """
+  def get_lists(user) do
+    user =
+      User
+      |> Repo.get!(user.id)
+      |> Repo.preload(:lists)
+
+    user.lists
+  end
+
+  @doc """
+  Creates a list for the given user.
+  """
+  def add_list(%User{} = user, attrs) do
+    %List{}
+    |> List.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:user, user)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Add a book to the given list.
+  """
+  def add_book_to_list(user, list_id, book_slug) do
+    list = get_list!(list_id) |> Repo.preload(:books)
+    book = get_book_by_slug!(book_slug)
+
+    %List{}
+    |> List.changeset(%{name: list.name})
+    |> Ecto.Changeset.put_assoc(:user, user)
+    |> Ecto.Changeset.put_assoc(:books, [book])
     |> Repo.insert()
   end
 

@@ -19,6 +19,14 @@ defmodule BookwyrmWeb.Resolvers.Books do
     {:ok, Books.list_authors(args)}
   end
 
+  def list(_, %{id: id}, _) do
+    {:ok, Books.get_list!(id)}
+  end
+
+  def lists(_, _, %{context: %{current_user: user}}) do
+    {:ok, Books.get_lists(user)}
+  end
+
   def user(_, %{id: id}, _) do
     {:ok, Accounts.get_user(id)}
   end
@@ -41,6 +49,33 @@ defmodule BookwyrmWeb.Resolvers.Books do
 
       {:ok, book} ->
         {:ok, book}
+    end
+  end
+
+  def add_list(_, args, %{context: %{current_user: user}}) do
+    case Books.add_list(user, %{name: args.name}) do
+      {:error, changeset} ->
+        {
+          :error,
+          message: "Could not add list!", details: ChangesetErrors.error_details(changeset)
+        }
+
+      {:ok, list} ->
+        {:ok, list}
+    end
+  end
+
+  def add_book_to_list(_, args, %{context: %{current_user: user}}) do
+    case Books.add_book_to_list(user, args.list_id, args.book_slug) do
+      {:error, changeset} ->
+        {
+          :error,
+          message: "Could not add book to list!",
+          details: ChangesetErrors.error_details(changeset)
+        }
+
+      {:ok, list} ->
+        {:ok, list}
     end
   end
 end
