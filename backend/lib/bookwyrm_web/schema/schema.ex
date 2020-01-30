@@ -1,4 +1,8 @@
 defmodule BookwyrmWeb.Schema.Schema do
+  @moduledoc """
+  This module contains all of our GraphQL schemas.
+  """
+
   use Absinthe.Schema
   import Absinthe.Resolution.Helpers, only: [dataloader: 1, dataloader: 3]
 

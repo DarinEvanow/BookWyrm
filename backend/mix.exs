@@ -5,7 +5,7 @@ defmodule Bookwyrm.MixProject do
     [
       app: :bookwyrm,
       version: "0.1.0",
-      elixir: "~> 1.5",
+      elixir: "~> 1.10",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -46,7 +46,8 @@ defmodule Bookwyrm.MixProject do
       {:absinthe_plug, "~> 1.4.0"},
       {:absinthe_phoenix, "~> 1.4.0"},
       {:dataloader, "~> 1.0.0"},
-      {:slugger, "~> 0.3"}
+      {:slugger, "~> 0.3"},
+      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false}
     ]
   end
 

@@ -1,4 +1,9 @@
 defmodule BookwyrmWeb.Resolvers.Accounts do
+  @moduledoc """
+  This module contains all of our Absinthe resolvers for our Accounts schema. This functionality
+  includes signing up, signing in, and getting information about the current user.
+  """
+
   alias Bookwyrm.Accounts
   alias Bookwyrm.Web.Schema.ChangesetErrors
 

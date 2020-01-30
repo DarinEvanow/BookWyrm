@@ -1,4 +1,8 @@
 defmodule Bookwyrm.Books.Author do
+  @moduledoc """
+  This module contains the schema for authors.
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query

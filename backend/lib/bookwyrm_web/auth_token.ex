@@ -1,4 +1,8 @@
 defmodule BookwyrmWeb.AuthToken do
+  @moduledoc """
+  The functionality that is used to create and verify tokens used in the authentication process
+  """
+
   @user_salt "user auth salt"
 
   @doc """

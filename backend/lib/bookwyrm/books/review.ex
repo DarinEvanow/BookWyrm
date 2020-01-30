@@ -1,4 +1,8 @@
 defmodule Bookwyrm.Books.Review do
+  @moduledoc """
+  This module contains the schema for reviews.
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query

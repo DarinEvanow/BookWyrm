@@ -1,4 +1,8 @@
 defmodule Bookwyrm.Accounts.User do
+  @moduledoc """
+  This module contains the schema for users.
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 

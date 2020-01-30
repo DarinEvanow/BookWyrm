@@ -1,4 +1,9 @@
 defmodule Bookwyrm.TestHelpers do
+  @moduledoc """
+  This module defines various fixtures that can be used throughout
+  our tests.
+  """
+
   alias Bookwyrm.Repo
 
   alias Bookwyrm.Books.{Author, Book, List, Review}
