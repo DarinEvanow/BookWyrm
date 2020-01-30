@@ -47,7 +47,8 @@ defmodule Bookwyrm.MixProject do
       {:absinthe_phoenix, "~> 1.4.0"},
       {:dataloader, "~> 1.0.0"},
       {:slugger, "~> 0.3"},
-      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
+      {:wormwood, "~> 0.1.0"}
     ]
   end
 
