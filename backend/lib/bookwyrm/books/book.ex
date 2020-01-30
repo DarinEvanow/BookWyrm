@@ -1,4 +1,8 @@
 defmodule Bookwyrm.Books.Book do
+  @moduledoc """
+  This module contains the schema for books.
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
   import Ecto.Query

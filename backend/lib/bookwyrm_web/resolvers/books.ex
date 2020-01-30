@@ -1,4 +1,8 @@
 defmodule BookwyrmWeb.Resolvers.Books do
+  @moduledoc """
+  This module contains all of our Absinthe resolvers for our Books schema.
+  """
+
   alias Bookwyrm.Books
   alias Bookwyrm.Accounts
   alias Bookwyrm.Web.Schema.ChangesetErrors
