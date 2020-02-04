@@ -4,7 +4,7 @@ defmodule BookwyrmWeb.Test.Schema.GetBookBySlugTest do
 
   load_gql(BookwyrmWeb.Schema.Schema, "test/support/queries/GetBookBySlug.gql")
 
-  describe "GetBooksBySlug.gql" do
+  describe "GetBookBySlug.gql" do
     test "should return The Name of the Wind" do
       result = query_gql(variables: %{"slug" => "the-name-of-the-wind"})
       {:ok, query_data} = result

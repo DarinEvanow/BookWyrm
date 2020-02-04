@@ -11,7 +11,7 @@
 # and so on) as they will fail if something goes wrong.
 
 alias Bookwyrm.Repo
-alias Bookwyrm.Books.{Author, Book, Review}
+alias Bookwyrm.Books.{Author, Book, List, Review}
 alias Bookwyrm.Accounts.User
 
 darin =
@@ -209,3 +209,12 @@ good_omens =
     ]
   })
   |> Repo.insert!()
+
+marina_list =
+  %List{}
+  |> List.changeset(%{
+    name: "Favorite Books"
+  })
+  |> Ecto.Changeset.put_assoc(:user, marina)
+  |> Ecto.Changeset.put_assoc(:books, [good_omens])
+  |> Repo.insert()

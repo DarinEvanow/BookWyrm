@@ -1,0 +1,6 @@
+query GetAuthorBySlug($slug : String) {
+  author(slug: $slug) {
+    name
+    slug
+  }
+}
