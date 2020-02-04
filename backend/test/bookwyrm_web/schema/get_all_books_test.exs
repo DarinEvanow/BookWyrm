@@ -1,10 +1,10 @@
-defmodule BookwyrmWeb.Test.BooksSchemaTest do
+defmodule BookwyrmWeb.Test.Schema.GetAllBooksTest do
   use Bookwyrm.DataCase, async: true
   use Wormwood.GQLCase
 
-  load_gql(BookwyrmWeb.Schema.Schema, "test/support/queries/books.gql")
+  load_gql(BookwyrmWeb.Schema.Schema, "test/support/queries/GetAllBooks.gql")
 
-  describe "books.gql" do
+  describe "GetAllBooks.gql" do
     test "should return all 6 books" do
       result = query_gql()
       {:ok, query_data} = result

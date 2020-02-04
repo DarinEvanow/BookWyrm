@@ -1,0 +1,8 @@
+query GetAllBooks {
+  books {
+    title
+    description
+    isbn13
+    slug
+  }
+}
