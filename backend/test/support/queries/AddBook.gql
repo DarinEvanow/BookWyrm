@@ -1,0 +1,20 @@
+mutation AddBook(
+  $title: String
+  $description: String
+  $isbn13: Int
+  $authorName: String
+) {
+  addBook(
+    title: $title
+    description: $description
+    isbn13: $isbn13
+    authorName: $authorName
+  ) {
+    title
+    description
+    isbn13
+    authors {
+      name
+    }
+  }
+}

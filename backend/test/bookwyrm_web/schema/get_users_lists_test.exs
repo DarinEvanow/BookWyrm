@@ -23,7 +23,6 @@ defmodule BookwyrmWeb.Test.Schema.GetUsersLists do
       {:ok, query_data} = result
       lists = get_in(query_data, [:data, "lists"])
       favorite_books = Enum.filter(lists, &(&1["name"] == "Favorite Books"))
-      IO.inspect(favorite_books)
       assert List.first(favorite_books)["slug"] == "favorite-books"
     end
   end

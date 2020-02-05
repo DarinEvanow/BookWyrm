@@ -1,4 +1,4 @@
-query GetAuthorBySlug($slug : String) {
+query GetAuthorBySlug($slug: String) {
   author(slug: $slug) {
     name
     slug

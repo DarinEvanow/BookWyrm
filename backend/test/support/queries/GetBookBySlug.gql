@@ -1,4 +1,4 @@
-query GetBookBySlug($slug : String) {
+query GetBookBySlug($slug: String) {
   book(slug: $slug) {
     title
     description
