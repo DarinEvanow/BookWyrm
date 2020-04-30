@@ -1,0 +1,12 @@
+query GetUsersLists {
+  lists {
+    name
+    slug
+    books {
+      title
+      description
+      isbn13
+      slug
+    }
+  }
+}

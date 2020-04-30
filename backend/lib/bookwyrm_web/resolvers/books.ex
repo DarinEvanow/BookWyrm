@@ -3,6 +3,7 @@ defmodule BookwyrmWeb.Resolvers.Books do
   This module contains all of our Absinthe resolvers for our Books schema.
   """
 
+  alias Bookwyrm.Repo
   alias Bookwyrm.Books
   alias Bookwyrm.Accounts
   alias Bookwyrm.Web.Schema.ChangesetErrors

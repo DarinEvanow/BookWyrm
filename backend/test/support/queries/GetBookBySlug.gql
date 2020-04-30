@@ -1,0 +1,8 @@
+query GetBookBySlug($slug: String) {
+  book(slug: $slug) {
+    title
+    description
+    isbn13
+    slug
+  }
+}
