@@ -1,6 +1,11 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
+import { Book } from '../../common/types';
+
+import Books from '../books/Books';
+import Error from '../error/Error';
+import Loading from '../loading/Loading';
 
 const GET_BOOKS_QUERY = gql`
   query GetBooks {
@@ -10,32 +15,19 @@ const GET_BOOKS_QUERY = gql`
   }
 `;
 
-interface Data {
-  books: Array<{ title: string }>;
-}
-
-const Loading: React.FC = () => {
-  return <div>Loading</div>;
-};
-
-const Error: React.FC = () => {
-  return <div>Error</div>;
-};
-
-const Result: React.FC<{ books: any }> = ({ books }) => {
-  return books.map((book: any) => <div>{book.title}</div>);
-};
-
 const Home: React.FC = () => {
   return (
-    <Query<Data> query={GET_BOOKS_QUERY}>
+    <Query<{ books: Book[] }> query={GET_BOOKS_QUERY}>
       {({ data, loading, error }) => {
         if (loading) return <Loading />;
-        if (error) {
-          console.log(error);
-          return <Error />;
-        }
-        return <Result books={data?.books} />;
+        if (error) return <Error error={error} />;
+        return (
+          <div>
+            {data?.books.map((book: any) => (
+              <div>{book.title}</div>
+            ))}
+          </div>
+        );
       }}
     </Query>
   );
