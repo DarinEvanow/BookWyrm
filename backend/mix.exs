@@ -41,6 +41,7 @@ defmodule Bookwyrm.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
+      {:cors_plug, "~> 2.0"},
       {:pbkdf2_elixir, "~> 1.0"},
       {:absinthe, "~> 1.4.0"},
       {:absinthe_plug, "~> 1.4.0"},
