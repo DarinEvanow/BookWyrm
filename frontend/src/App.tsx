@@ -14,8 +14,8 @@ const App: React.FC = () => {
         <SC.Content>
           <Switch>
             <Route path="/" exact component={HomeContainer} />
-            <Route path="/library" exact component={LibraryContainer} />
             <Route path="/search" exact component={SearchContainer} />
+            <Route path="/library" exact component={LibraryContainer} />
           </Switch>
         </SC.Content>
         <Navigation />
