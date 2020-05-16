@@ -30,7 +30,7 @@ export const App = styled.div`
       'navigation navigation navigation';
 
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 100px;
+    grid-template-rows: 1fr 80px;
   }
 
   @media screen and (min-width: 800px) {
