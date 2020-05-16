@@ -6,6 +6,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
+    color: white;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -45,4 +46,5 @@ export const App = styled.div`
 
 export const Content = styled.div`
   grid-area: content;
+  background-color: #1b1b21;
 `;

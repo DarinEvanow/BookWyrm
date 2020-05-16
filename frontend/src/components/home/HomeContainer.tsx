@@ -1,7 +1,7 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import { Book } from '../../common/types';
+import { IBook } from '../../common/types';
 
 import Home from './Home';
 import Error from '../error/Error';
@@ -12,17 +12,21 @@ export const GET_BOOKS_QUERY = gql`
     books {
       id
       title
+      authors {
+        id
+        name
+      }
     }
   }
 `;
 
 const HomeContainer: React.FC = () => {
   return (
-    <Query<{ books: Book[] }> query={GET_BOOKS_QUERY}>
+    <Query<{ books: IBook[] }> query={GET_BOOKS_QUERY}>
       {({ data, loading, error }) => {
         if (loading) return <Loading />;
         if (error) return <Error error={error} />;
-        return <Home books={data?.books} />;
+        return <Home books={data?.books || []} />;
       }}
     </Query>
   );

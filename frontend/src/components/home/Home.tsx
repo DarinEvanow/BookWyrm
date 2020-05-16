@@ -1,16 +1,9 @@
 import React from 'react';
-import { Book } from '../../common/types';
+import { IBook } from '../../common/types';
+import BookList from '../books/BookList';
 
-const Home: React.FC<{ books: Book[] | undefined }> = ({ books }) => {
-  return (
-    <div>
-      {books?.map((book: any) => (
-        <React.Fragment key={book.id}>
-          <div>{book.title}</div>
-        </React.Fragment>
-      ))}
-    </div>
-  );
+const Home: React.FC<{ books: IBook[] }> = ({ books }) => {
+  return <BookList books={books} />;
 };
 
 export default Home;
