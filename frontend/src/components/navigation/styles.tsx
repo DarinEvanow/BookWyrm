@@ -5,9 +5,16 @@ export const Navigation = styled.div`
   grid-area: navigation;
   background-color: #1b1b21;
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-around;
+
+  @media screen and (min-width: 0px) {
+    flex-direction: row;
+  }
+
+  @media screen and (min-width: 800px) {
+    flex-direction: column;
+  }
 `;
 
 const activeClassName = 'nav-item-active';
