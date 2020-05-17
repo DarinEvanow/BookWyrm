@@ -3,10 +3,10 @@ import styled from 'styled-components';
 export const Book = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 20px;
 `;
 
 export const BookImage = styled.img`
-  height: 300px;
   width: 200px;
 `;
 

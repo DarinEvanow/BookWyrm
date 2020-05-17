@@ -11,7 +11,7 @@ const Book: React.FC<IBook> = ({ title, authors }) => {
     <SC.Book>
       <BookImage src={aWildSheepChase} />
       <p>{title}</p>
-      <p>by Haruki Murakami</p>
+      <p>by {authors[0].name}</p>
     </SC.Book>
   );
 };

@@ -4,8 +4,6 @@ import Book from './Book';
 import * as SC from './styles';
 
 const Books: React.FC<{ books: IBook[] }> = ({ books }) => {
-  console.log(books);
-
   return (
     <SC.BookList>
       {books.map((book: IBook) => (
