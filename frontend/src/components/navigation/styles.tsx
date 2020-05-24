@@ -7,13 +7,19 @@ export const Navigation = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  position: fixed;
 
   @media screen and (min-width: 0px) {
     flex-direction: row;
+    width: 100%;
+    height: 75px;
+    left: 0;
+    bottom: 0;
   }
 
   @media screen and (min-width: 800px) {
     flex-direction: column;
+    height: 100%;
   }
 `;
 

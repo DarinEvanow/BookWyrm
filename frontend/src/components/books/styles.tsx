@@ -16,4 +16,21 @@ export const BookList = styled.div`
   height: 400px;
   width: 100vw;
   overflow-x: scroll;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export const BookListTitle = styled.h2`
+  font-family: 'Alegreya', serif;
+  margin-left: 20px;
+  margin-bottom: 0px;
+`;
+
+export const BookListContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
 `;

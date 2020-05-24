@@ -47,4 +47,6 @@ export const App = styled.div`
 export const Content = styled.div`
   grid-area: content;
   background-color: #1b1b21;
+  padding-bottom: 75px;
+  clear: both;
 `;
