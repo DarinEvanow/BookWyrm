@@ -61,7 +61,7 @@ defmodule Bookwyrm.Books do
   [{:limit, 15}, {:order, :asc}]
   """
   def list_books(criteria) do
-    query = from(b in Book)
+    query = from(b in Book, preload: [:authors])
 
     Enum.reduce(criteria, query, fn
       {:limit, limit}, query ->

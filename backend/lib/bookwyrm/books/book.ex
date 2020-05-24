@@ -31,6 +31,7 @@ defmodule Bookwyrm.Books.Book do
     |> add_slug()
     |> unique_constraint(:isbn13)
     |> unique_constraint(:slug)
+    |> put_assoc(:authors, attrs.authors)
   end
 
   defp add_slug(changeset) do
